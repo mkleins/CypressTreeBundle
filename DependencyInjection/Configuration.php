@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('label_template')->defaultValue('CypressTreeBundle::label.html.twig')->isRequired()->end()
                         ->scalarNode('controller')->defaultValue(null)->isRequired()->end()
                         ->booleanNode('editable_root')->defaultValue(false)->end()
+                        ->booleanNode('contextual_menu')->defaultValue(false)->end()
                         ->scalarNode('theme')->defaultValue('default')->end()
                         ->scalarNode('assets_manager')->defaultValue('assetic')->end()
                         ->scalarNode('root_icon')->defaultValue('bundles/cypresstree/images/database.png')->end()

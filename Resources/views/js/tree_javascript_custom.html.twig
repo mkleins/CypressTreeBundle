@@ -43,6 +43,9 @@
                 "html_data",
                 "themes",
                 "types",
+                {% if conf.contextual_menu %}
+                "contextmenu",
+                {% endif %}
                 {% if conf.isSortable %}
                 "crrm",
                 "dnd"
