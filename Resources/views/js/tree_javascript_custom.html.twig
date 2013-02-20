@@ -64,7 +64,7 @@
                 callUrl,
                 function (r) {
                      if(r.status) {
-                        $(data.rslt.obj).attr("id", "node_" + r.id);
+                        $(data.rslt.obj).attr("id", "node-" + r.id);
                     }
                      else {
                          $.jstree.rollback(data.rlbk);
