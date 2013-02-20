@@ -58,19 +58,36 @@ class CypressTreeLoader implements LoaderInterface
         }
         $routes = new RouteCollection();
         foreach ($this->trees as $treeConfiguration) {
-            $pattern = sprintf('/ajax/%s/sort/{node}/{ref}/{move}', $treeConfiguration->getName());
+           $pattern = sprintf('/ajax/%s/sort/{node}/{ref}/{move}', $treeConfiguration->getName());
             $defaults = array(
                 '_controller' => sprintf('%s:%s', $treeConfiguration->controller, 'sortNode')
             );
             $route = new Route($pattern, $defaults, array(), array('expose' => true));
             $routes->add(sprintf('_cypress_tree_%s_ajax_sort', $treeConfiguration->getName()), $route);
 
-            $pattern = sprintf('/ajax/%s/add/{parent}', $treeConfiguration->getName());
+            //Add node
+            $pattern = sprintf('/ajax/%s/add/{parent}/{title}', $treeConfiguration->getName());
             $defaults = array(
                 '_controller' => sprintf('%s:%s', $treeConfiguration->controller, 'addNode')
             );
             $route = new Route($pattern, $defaults, array(), array('expose' => true));
             $routes->add(sprintf('_cypress_tree_%s_ajax_add', $treeConfiguration->getName()), $route);
+
+            //Remove node
+            $pattern = sprintf('/ajax/%s/remove/{node}', $treeConfiguration->getName());
+            $defaults = array(
+                '_controller' => sprintf('%s:%s', $treeConfiguration->controller, 'removeNode')
+            );
+            $route = new Route($pattern, $defaults, array(), array('expose' => true));
+            $routes->add(sprintf('_cypress_tree_%s_ajax_remove', $treeConfiguration->getName()), $route);
+
+            //Rename node
+            $pattern = sprintf('/ajax/%s/rename/{node}/{title}', $treeConfiguration->getName());
+            $defaults = array(
+                '_controller' => sprintf('%s:%s', $treeConfiguration->controller, 'renameNode')
+            );
+            $route = new Route($pattern, $defaults, array(), array('expose' => true));
+            $routes->add(sprintf('_cypress_tree_%s_ajax_rename', $treeConfiguration->getName()), $route);
         }
 
         return $routes;

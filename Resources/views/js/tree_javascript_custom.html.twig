@@ -52,6 +52,56 @@
                 {% endif %}
             ]
         });
+       {% if conf.contextual_menu %}
+       $('.cypress_tree').bind("create.jstree", function (e, data) {
+            var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_add', {
+                parent: data.rslt.parent.attr("id").replace("node-",""),
+                position: data.rslt.position,
+                title:data.rslt.name,
+                type: data.rslt.obj.attr("rel")
+            });
+            $.post(
+                callUrl,
+                function (r) {
+                     if(r.status) {
+                        $(data.rslt.obj).attr("id", "node_" + r.id);
+                    }
+                     else {
+                         $.jstree.rollback(data.rlbk);
+                     }
+                 }
+            );
+         }),
+       $('.cypress_tree').bind("remove.jstree", function (e, data) {
+                var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_remove', {
+                    node: data.rslt.obj.attr("id").replace("node-","")
+                });
+                $.ajax({
+                     async : false,
+                     type: 'POST',
+                     url: callUrl,
+                     success : function (r) {
+                         if(!r=="ok") {
+                             data.inst.refresh();
+                         }
+                     }
+                });
+         }),
+        $('.cypress_tree').bind("rename.jstree", function (e, data) {
+             var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_rename', {
+                    node: data.rslt.obj.attr("id").replace("node-",""),
+                    title: data.rslt.new_name
+                });
+             $.post(
+                 callUrl,
+                 function (r) {
+                     if(!r.status) {
+                         $.jstree.rollback(data.rlbk);
+                     }
+                 }
+             );
+        }),
+        {% endif %}
         $('.cypress_tree').bind('move_node.jstree', function(e, data) {
             var move = $.jstree._focused()._get_move();
             var moveAfter = 'after' == move.p ? '1' : '0';
