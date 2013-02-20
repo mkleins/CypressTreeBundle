@@ -42,9 +42,11 @@ class CypressTreeExtension extends Extension
             'label_template' => 'CypressTreeBundle::label.html.twig',
             'controller' => 'CypressTreeBundle:Default',
             'editable_root' => false,
+            'is_searchable' => false,
             'theme' => 'default',
             'assets_manager' => 'assetic',
             'root_icon' => 'bundles/cypresstree/images/database.png',
+            'folder_icon' => 'bundles/cypresstree/images/folder.png',
             'node_icon' => 'bundles/cypresstree/images/folder.png'
         );
     }

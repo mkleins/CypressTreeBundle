@@ -43,6 +43,9 @@
                 "html_data",
                 "themes",
                 "types",
+                {% if conf.is_searchable %}
+                "search",
+                {% endif %}
                 {% if conf.contextual_menu %}
                 "contextmenu",
                 {% endif %}

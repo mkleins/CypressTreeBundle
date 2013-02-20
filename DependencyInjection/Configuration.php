@@ -31,10 +31,12 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('controller')->defaultValue(null)->isRequired()->end()
                         ->booleanNode('editable_root')->defaultValue(false)->end()
                         ->booleanNode('contextual_menu')->defaultValue(false)->end()
+                        ->booleanNode('is_searchable')->defaultValue(false)->end()
                         ->scalarNode('theme')->defaultValue('default')->end()
                         ->scalarNode('assets_manager')->defaultValue('assetic')->end()
                         ->scalarNode('root_icon')->defaultValue('bundles/cypresstree/images/database.png')->end()
                         ->scalarNode('node_icon')->defaultValue('bundles/cypresstree/images/folder.png')->end()
+                        ->scalarNode('folder_icon')->defaultValue('bundles/cypresstree/images/folder.png')->end()
                     ->end()
             ->end();
 
