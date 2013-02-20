@@ -8,18 +8,28 @@
             "types": {
                 "valid_children" : [ "root" ],
                 "types" : {
+                     "default": {
+                        "icon": {
+                            "image": "{{ asset(conf.node_icon) }}"
+                        },
+                        "valid_children": "none"
+                    },
+                    "folder": {
+                        "icon": {
+                            "image": "{{ asset(conf.folder_icon) }}"
+                        },
+                        "valid_children": [ "default", "folder" ]
+                    },
                     "root": {
                         "icon": {
                             "image": "{{ asset(conf.root_icon) }}"
                         },
-                        "valid_children" : [ "default" ]
-                    },
-                    "default": {
-                        "icon": {
-                            "image": "{{ asset(conf.node_icon) }}"
-                        },
-                        "valid_children": [ "default" ]
-                    }
+                        "valid_children" : [ "default", "folder" ],
+                        "start_drag" : false,
+                        "move_node" : false,
+                        "delete_node" : false,
+                        "remove" : false
+                    } 
                 }
             },
             "crrm": {
