@@ -12,7 +12,7 @@
                         "icon": {
                             "image": "{{ asset(conf.node_icon) }}"
                         },
-                        "valid_children": "none"
+                        "valid_children": [ "default" ]
                     },
                     "folder": {
                         "icon": {
@@ -64,8 +64,29 @@
                 "dnd"
                 {% endif %}
             ]
-        });
+            {% if conf.contextual_menu %}
+            ,"contextmenu": {"items": customMenu}
+            {% endif %}
+        }); 
        {% if conf.contextual_menu %}
+       function customMenu(node) {
+           var items = {
+                createItem: { 
+                    label: "Create",
+                    action: function (node) {   return {createItem: this.create(node) }; }
+                },
+                renameItem: { 
+                    label: "Rename",
+                    action: function (node) {  return {renameItem: this.rename(node) }; }
+                },
+                deleteItem: { 
+                    label: "Delete",
+                    action: function (node) {     return {deleteItem: this.remove(node) }; },
+                    "separator_after": true
+                }
+            };
+            return items;
+        }
        $('.cypress_tree').bind("create.jstree", function (e, data) {
             var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_add', {
                 parent: data.rslt.parent.attr("id").replace("node-",""),
