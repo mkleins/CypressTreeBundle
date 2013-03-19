@@ -5,6 +5,19 @@
                 "theme": "{{ conf.theme }}",
                 "url": "/bundles/cypresstree/jstree/themes/{{ conf.theme }}/style.css"
             },
+ 	    {% if conf.is_searchable %}
+  	    "search" : {
+	             var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_search');
+	            "ajax" : {
+	                "url" : callUrl,
+	                "data" : function (str) {
+	                    return {
+	                        "search" : str
+	                    };
+	                }
+	            }
+	     },
+	    {% endif %}
             "types": {
                 "valid_children" : [ "root" ],
                 "types" : {
@@ -53,6 +66,7 @@
                 "html_data",
                 "themes",
                 "types",
+		"ui",
                 {% if conf.is_searchable %}
                 "search",
                 {% endif %}

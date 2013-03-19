@@ -88,6 +88,14 @@ class CypressTreeLoader implements LoaderInterface
             );
             $route = new Route($pattern, $defaults, array(), array('expose' => true));
             $routes->add(sprintf('_cypress_tree_%s_ajax_rename', $treeConfiguration->getName()), $route);
+
+	    //Search node
+            $pattern = sprintf('/ajax/%s/search/', $treeConfiguration->getName());
+            $defaults = array(
+                '_controller' => sprintf('%s:%s', $treeConfiguration->controller, 'searchNode')
+            );
+            $route = new Route($pattern, $defaults, array(), array('expose' => true));
+            $routes->add(sprintf('_cypress_tree_%s_ajax_search', $treeConfiguration->getName()), $route);
         }
 
         return $routes;
