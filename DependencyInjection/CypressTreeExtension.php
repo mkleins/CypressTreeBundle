@@ -43,6 +43,8 @@ class CypressTreeExtension extends Extension
             'controller' => 'CypressTreeBundle:Default',
             'editable_root' => false,
             'is_searchable' => false,
+            'is_selectable' => false,
+            'is_sortable' => true,
             'theme' => 'default',
             'assets_manager' => 'assetic',
             'root_icon' => 'bundles/cypresstree/images/database.png',

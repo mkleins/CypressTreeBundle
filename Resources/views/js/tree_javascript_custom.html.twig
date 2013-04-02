@@ -5,19 +5,6 @@
                 "theme": "{{ conf.theme }}",
                 "url": "/bundles/cypresstree/jstree/themes/{{ conf.theme }}/style.css"
             },
- 	    {% if conf.is_searchable %}
-  	    "search" : {
-	             var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_search');
-	            "ajax" : {
-	                "url" : callUrl,
-	                "data" : function (str) {
-	                    return {
-	                        "search" : str
-	                    };
-	                }
-	            }
-	     },
-	    {% endif %}
             "types": {
                 "valid_children" : [ "root" ],
                 "types" : {
@@ -73,31 +60,42 @@
                 {% if conf.contextual_menu %}
                 "contextmenu",
                 {% endif %}
+                {% if conf.is_selectable %}
+                "checkbox",
+                {% endif %}
                 {% if conf.isSortable %}
                 "crrm",
                 "dnd"
                 {% endif %}
-            ]
+            ],
             {% if conf.contextual_menu %}
-            ,"contextmenu": {"items": customMenu}
+            ,"contextmenu": {"items": customMenu},
+            {% endif %}
+            {% if conf.is_searchable %}
+            "search": {
+                "case_insensitive" : true,
+                "ajax" : {
+                    "url" : Routing.generate('_cypress_tree_{{ conf.name }}_ajax_search'),
+                    "data" : function (str) {
+                        return {
+                            "search" : str
+                        };
+                    }
+                }
+             }
             {% endif %}
         }); 
        {% if conf.contextual_menu %}
        function customMenu(node) {
            var items = {
                 createItem: { 
-                    label: "Create",
+                    label: "Créer",
                     action: function (node) {   return {createItem: this.create(node) }; }
                 },
                 renameItem: { 
-                    label: "Rename",
+                    label: "Renommer",
                     action: function (node) {  return {renameItem: this.rename(node) }; }
                 },
-                deleteItem: { 
-                    label: "Delete",
-                    action: function (node) {     return {deleteItem: this.remove(node) }; },
-                    "separator_after": true
-                }
             };
             return items;
         }
