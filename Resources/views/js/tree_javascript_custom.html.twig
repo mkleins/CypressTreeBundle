@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function() {
-        $('.cypress_tree').jstree({
+        $('.cypress_tree_{{ name }}').jstree({
             "themes": {
                 "theme": "{{ conf.theme }}",
                 "url": "/bundles/cypresstree/jstree/themes/{{ conf.theme }}/style.css"
@@ -65,11 +65,11 @@
                 {% endif %}
                 {% if conf.isSortable %}
                 "crrm",
-                "dnd"
+                "dnd",
                 {% endif %}
             ],
             {% if conf.contextual_menu %}
-            ,"contextmenu": {"items": customMenu},
+            "contextmenu": {"items": customMenu},
             {% endif %}
             {% if conf.is_searchable %}
             "search": {

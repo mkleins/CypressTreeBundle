@@ -79,7 +79,8 @@ class TreeBundleExtension extends \Twig_Extension
         $template = $this->environment->loadTemplate('CypressTreeBundle::tree.html.twig');
         return $template->render(array(
             'node' => $node,
-            'conf' => $treeConfiguration
+            'conf' => $treeConfiguration,
+            'name' => $treeName
         ));
     }
 
@@ -109,7 +110,8 @@ class TreeBundleExtension extends \Twig_Extension
         $treeConfiguration = $this->getTreeConfiguration($treeName);
         $template = $this->environment->loadTemplate(sprintf('CypressTreeBundle::js/tree_javascripts_%s.html.twig', $treeConfiguration->assets_manager));
         return $template->render(array(
-            'conf' => $treeConfiguration
+            'conf' => $treeConfiguration,
+            'name' => $treeName
         ));
     }
 
