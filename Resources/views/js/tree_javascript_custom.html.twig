@@ -145,6 +145,7 @@ function startJstree_{{ name }}(){
          );
     }),
     {% endif %}
+
     $('.cypress_tree_{{ name }}').bind('move_node.jstree', function(e, data) {
         var move = $.jstree._focused()._get_move();
         var node = move.o;
@@ -171,7 +172,4 @@ function startJstree_{{ name }}(){
         });
     });
 }
-$(document).ready(function() {
-    startJstree_{{ name }}(); 
-});
 </script>
