@@ -12,7 +12,7 @@
         {% for child in node.children %}
             {% include "CypressTreeBundle::tree_branch.html.twig" with { 'node': child, 'rel': rel } %}
         {% endfor %}
-        {% if node.children|length > 0 %}
+        {% if node.children|length > 0 and conf.is_selectable %}
             <li rel="default" id="{{ node.id }}" class="jstree-add"><a href="#" class="add"><i class="icon-plus"></i>Ajouter</a></li>
         {% endif %}
     </ul>
