@@ -27,10 +27,6 @@ class CypressTreeExtension extends Extension
         $this->addDefaultTree($config);
         $container->setParameter('cypress_tree.configs', $config);
 
-        /*foreach ($config['trees'] as $name => $tree) {
-            $definition = new Definition($tree['controller']);
-            $container->setDefinition(sprintf('cypress_tree.%s.controller', $name), $definition);
-        }*/
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
