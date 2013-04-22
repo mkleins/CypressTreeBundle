@@ -1,6 +1,6 @@
 {% set rel = rel is defined ? rel : 'default' %}
-{% set rel = (node.getChildren|length > 0 and rel != 'root') ? 'folder' : rel %}
-<li class="jstree-open{{ node.children|length == 0 ? ' jstree-leaf' : '' }} {{ node.relatedReferential ? ' jstree-related' : '' }}" rel="{{ rel }}" id="node-{{ node.id }}">
+{% set rel = (node.children|length > 0 and rel != 'root') ? 'folder' : rel %}
+<li class="jstree-open{{ node.children|length == 0 ? ' jstree-leaf' : '' }} {{ node.related_referential_id is defined ? ' jstree-related' : '' }}" rel="{{ rel }}" id="node-{{ node.id is defined ? node.id : '' }}">
     {% if 'root' == rel and not conf.editable_root %}
         <a href="#" class="jstree-root">{{ node }}</a>
     {% else %}
@@ -9,9 +9,11 @@
     {% if (rel == 'folder' or rel == 'root') %}
     {% set rel = rel == 'root' ? 'folder' : 'default' %}
     <ul>
-        {% for child in node.children %}
-            {% include "CypressTreeBundle::tree_branch.html.twig" with { 'node': child, 'rel': rel } %}
-        {% endfor %}
+        {% if node.children|length > 0 %}
+            {% for child in node.children %}
+                {% include "CypressTreeBundle::tree_branch.html.twig" with { 'node': child, 'rel': rel } %}
+            {% endfor %}
+        {% endif %}
         {% if node.children|length > 0 and conf.is_selectable %}
             <li rel="default" id="{{ node.id }}" class="jstree-add"><a href="#" class="add"><i class="icon-plus"></i>Ajouter</a></li>
         {% endif %}
