@@ -93,6 +93,10 @@ function startJstree_{{ name }}(){
                 label: "Renommer",
                 action: function (node) {  return {renameItem: this.rename(node) }; }
             },
+            deleteItem: { 
+                label: "del",
+                action: function (node) {  return {deleteItem: this.remove(node) }; }
+            },
         };
         return items;
     }
