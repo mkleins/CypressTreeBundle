@@ -82,6 +82,10 @@ function startJstree_{{ name }}(){
          }
         {% endif %}
     }); 
+    $('.cypress_tree_{{ name }}').bind("loaded.jstree", function (event, data) {
+        $('.div_wait').hide();
+        $('.cypress_tree_{{ name }}').show();
+    }),
    {% if conf.contextual_menu %}
    function customMenu(node) {
        var items = {
@@ -100,6 +104,8 @@ function startJstree_{{ name }}(){
         };
         return items;
     }
+
+   
    $('.cypress_tree_{{ name }}').bind("create.jstree", function (e, data) {
         var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_add', {
             parent: data.rslt.parent.attr("id").replace("node-",""),
