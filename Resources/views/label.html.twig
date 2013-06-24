@@ -1,1 +1,1 @@
-<a href="#" >{{ node.name is defined ? node.name : '' }}</a>
+<a href="#" >{{ ref_before == 1 ? node.reference~' - ' : '' }}{{ node.name is defined ? node.name : '' }}</a>

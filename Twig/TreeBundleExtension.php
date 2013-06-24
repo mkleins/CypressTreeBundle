@@ -73,14 +73,15 @@ class TreeBundleExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function tree($treeName, $node)
+    public function tree($treeName, $node, $ref_before)
     {
         $treeConfiguration = $this->getTreeConfiguration($treeName);
         $template = $this->environment->loadTemplate('CypressTreeBundle::tree.html.twig');
         return $template->render(array(
             'node' => $node,
             'conf' => $treeConfiguration,
-            'name' => $treeName
+            'name' => $treeName,
+            'ref_before' => $ref_before
         ));
     }
 
