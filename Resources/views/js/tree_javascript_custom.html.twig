@@ -82,10 +82,7 @@ function startJstree_{{ name }}(){
          }
         {% endif %}
     }); 
-    $('.cypress_tree_{{ name }}').bind("loaded.jstree", function (event, data) {
-        $('.div_wait').hide();
-        $('.cypress_tree_{{ name }}').show();
-    }),
+
    {% if conf.contextual_menu %}
    function customMenu(node) {
        var items = {
@@ -155,7 +152,10 @@ function startJstree_{{ name }}(){
          );
     }),
     {% endif %}
-
+    $('.cypress_tree_{{ name }}').bind("loaded.jstree", function (event, data) {
+        $('.div_wait').hide();
+        $('.cypress_tree_{{ name }}').show();
+    });
     $('.cypress_tree_{{ name }}').bind('move_node.jstree', function(e, data) {
         var move = $.jstree._focused()._get_move();
         var node = move.o;
