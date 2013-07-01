@@ -32,6 +32,9 @@ function startJstree_{{ name }}(){
             } 
         }
     },
+    "checkbox": {
+          two_state: true
+       },
     "crrm": {
         "move" : {
             "check_move" : function (m) {
@@ -42,6 +45,7 @@ function startJstree_{{ name }}(){
             }
         }
     },
+
     "dnd": {
         "drop_target" : false,
         "drag_target" : false
@@ -51,19 +55,19 @@ function startJstree_{{ name }}(){
         "themes",
         "types",
     "ui",
-            {% if conf.is_searchable %}
-            "search",
-            {% endif %}
-            {% if conf.contextual_menu %}
-            "contextmenu",
-            {% endif %}
-            {% if conf.is_selectable %}
-            "checkbox",
-            {% endif %}
-            {% if conf.isSortable %}
-            "crrm",
-            "dnd",
-            {% endif %}
+        {% if conf.is_searchable %}
+        "search",
+        {% endif %}
+        {% if conf.contextual_menu %}
+        "contextmenu",
+        {% endif %}
+        {% if conf.is_selectable %}
+        "checkbox",
+        {% endif %}
+        {% if conf.isSortable %}
+        "crrm",
+        "dnd",
+        {% endif %}
         ],
         {% if conf.contextual_menu %}
         "contextmenu": {"items": customMenu},
@@ -102,7 +106,7 @@ function startJstree_{{ name }}(){
         return items;
     }
 
-   
+  
    $('.cypress_tree_{{ name }}').bind("create.jstree", function (e, data) {
         var callUrl = Routing.generate('_cypress_tree_{{ conf.name }}_ajax_add', {
             parent: data.rslt.parent.attr("id").replace("node-",""),
@@ -152,6 +156,7 @@ function startJstree_{{ name }}(){
          );
     }),
     {% endif %}
+
     $('.cypress_tree_{{ name }}').bind("loaded.jstree", function (event, data) {
         $('.div_wait').hide();
         $('.cypress_tree_{{ name }}').show();
