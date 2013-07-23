@@ -4,7 +4,7 @@
 {% elseif node.children|length == 0 %}
     {% set rel = 'default' %}
 {% endif %}
-<li class="{{ rel == 'root' ? ' jstree-open' : 'jstree-closed' }} {{ node.children|length == 0 ? ' jstree-leaf' : '' }} {{ node.related_referential_id ? ' jstree-related' : '' }} {{ node.is_protected ? ' jstree-protected' : '' }}" rel="{{ rel }}" id="node-{{ node.id is defined ? node.id : '' }}">
+<li class="{{ rel == 'root' ? 'jstree-open' : 'jstree-closed' }} {{ node.children|length == 0 ? 'jstree-leaf' : '' }} {{ node.related_referential_id ? ' jstree-related' : '' }} {{ node.is_protected ? 'jstree-protected' : '' }} {{ node.specificity_referential_id ? 'jstree-specificity' : '' }}" rel="{{ rel }}" id="node-{{ node.id is defined ? node.id : '' }}">
     {% if 'root' == rel and not conf.editable_root %}
         <a href="#" class="jstree-root">{{ node.name }}</a>
     {% else %}
