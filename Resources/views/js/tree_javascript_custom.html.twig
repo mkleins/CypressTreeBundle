@@ -57,6 +57,7 @@ function startJstree_{{ name }}(){
     "ui",
         {% if conf.is_searchable %}
         "search",
+        "adv_search",
         {% endif %}
         {% if conf.contextual_menu %}
         "contextmenu",
@@ -75,14 +76,6 @@ function startJstree_{{ name }}(){
         {% if conf.is_searchable %}
         "search": {
             "case_insensitive" : true,
-            "ajax" : {
-                "url" : Routing.generate('_cypress_tree_{{ conf.name }}_ajax_search'),
-                "data" : function (str) {
-                    return {
-                        "search" : str
-                    };
-                }
-            }
          }
         {% endif %}
     }); 
