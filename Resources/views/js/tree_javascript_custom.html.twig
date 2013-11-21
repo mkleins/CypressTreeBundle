@@ -1,5 +1,39 @@
 <script>
-function startJstree_{{ name }}(){
+function stripVowelAccent(str)
+{
+ var rExps=[
+ {re:/[\xC0-\xC6]/g, ch:'A'},
+ {re:/[\xE0-\xE6]/g, ch:'a'},
+ {re:/[\xC8-\xCB]/g, ch:'E'},
+ {re:/[\xE8-\xEB]/g, ch:'e'},
+ {re:/[\xCC-\xCF]/g, ch:'I'},
+ {re:/[\xEC-\xEF]/g, ch:'i'},
+ {re:/[\xD2-\xD6]/g, ch:'O'},
+ {re:/[\xF2-\xF6]/g, ch:'o'},
+ {re:/[\xD9-\xDC]/g, ch:'U'},
+ {re:/[\xF9-\xFC]/g, ch:'u'},
+ {re:/[\xD1]/g, ch:'N'},
+ {re:/[\xF1]/g, ch:'n'} ];
+
+ for(var i=0, len=rExps.length; i<len; i++)
+  str=str.replace(rExps[i].re, rExps[i].ch);
+
+ return str;
+}
+ (function ($) {
+    $.expr[':'].jstree_startBy = function(a,i,m){
+        return stripVowelAccent((a.textContent || a.innerText || "").toLowerCase().trim()).indexOf(stripVowelAccent(m[3].toLowerCase()))==0;
+    };
+
+    $.expr[':'].jstree_contains = function(a,i,m){
+        return stripVowelAccent((a.textContent || a.innerText || "").toLowerCase()).indexOf(stripVowelAccent(m[3].toLowerCase()))>=0;
+    };
+})(jQuery);
+
+function startJstree_{{ name }}(search_type){
+    if(!search_type){
+        search_type =  "jstree_contains";
+    }
     $('.cypress_tree_{{ name }}').jstree({
     "themes": {
         "theme": "{{ conf.theme }}",
@@ -65,7 +99,7 @@ function startJstree_{{ name }}(){
         {% if conf.is_selectable %}
         "checkbox",
         {% endif %}
-        {% if conf.isSortable %}
+        {% if conf.is_sortable %}
         "crrm",
         "dnd",
         {% endif %}
@@ -76,6 +110,7 @@ function startJstree_{{ name }}(){
         {% if conf.is_searchable %}
         "search": {
             "case_insensitive" : true,
+            "search_method" : search_type,
          }
         {% endif %}
     }); 
@@ -180,4 +215,5 @@ function startJstree_{{ name }}(){
         });
     });
 }
+
 </script>
