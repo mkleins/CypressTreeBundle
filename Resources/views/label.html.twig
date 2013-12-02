@@ -1,1 +1,1 @@
-<a href="#" {% if node.related_referential_id %} id="{{ node.id }}"{% endif %} >{{ ref_before == 1 ? node.reference~' - ' : '' }}{{ node.name is defined ? node.name : '' }}</a>
+<a href="#" {% if node.id %} id="{{ node.id }}"{% endif %} >{{ ref_before == 1 ? node.reference~' - ' : '' }}{{ node.name is defined ? node.name : '' }}</a>
