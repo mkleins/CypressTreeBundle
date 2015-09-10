@@ -47,11 +47,21 @@ class TreeBundleExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'cypress_tree'             => new \Twig_Function_Method($this, 'tree', array('is_safe' => array('html'))),
-            'cypress_tree_default'     => new \Twig_Function_Method($this, 'treeDefault', array('is_safe' => array('html'))),
-            'cypress_tree_javascripts' => new \Twig_Function_Method($this, 'javascripts', array('is_safe' => array('html'))),
-            'cypress_tree_javascripts_default' => new \Twig_Function_Method($this, 'javascriptsDefault', array('is_safe' => array('html'))),
-            //'cypress_tree_stylesheets' => new \Twig_Function_Method($this, 'stylesheets', array('is_safe' => array('html')))
+            'cypress_tree'             => new \Twig_SimpleFunction(function($treeName, $node, $ref_before) {
+                return $this->tree($treeName, $node, $ref_before);
+            }), array('is_safe' => array('html'))),
+            'cypress_tree_default'     => new \Twig_SimpleFunction(function($node) {
+                return $this->treeDefault($node);
+            }), array('is_safe' => array('html'))),
+            'cypress_tree_javascripts' => new \Twig_SimpleFunction(function($treeName) {
+                return $this->javascripts($treeName);
+            }), array('is_safe' => array('html'))),
+            'cypress_tree_javascripts_default' => new \Twig_SimpleFunction(function() {
+                return $this->javascriptsDefault();
+            }), array('is_safe' => array('html'))),
+            // 'cypress_tree_stylesheets' => new \Twig_SimpleFunction(function() {
+            //     return $this->stylesheets();
+            // }), array('is_safe' => array('html')))
         );
     }
 
