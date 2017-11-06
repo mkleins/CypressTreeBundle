@@ -115,10 +115,6 @@ function startJstree_{{ name }}(search_type){
         {% endif %}
     }); 
 
-    $('.cypress_tree_{{ name }}').bind("after_open.jstree", function (e, data) {
-        document.documentElement.scrollTop = data.rslt.obj.position().top;
-    });
-  
    {% if conf.contextual_menu %}
    function customMenu(node) {
        var items = {
