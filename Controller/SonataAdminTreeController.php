@@ -9,7 +9,6 @@
 
 namespace Cypress\TreeBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 use Cypress\TreeBundle\Interfaces\TreeControllerSortableInterface;
@@ -18,7 +17,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * Controller per NestedSet
  */
-class SonataAdminTreeController extends CRUDController
+class SonataAdminTreeController
 {
     /**
      * Action per la lista
